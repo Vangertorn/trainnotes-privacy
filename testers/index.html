@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ru" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тестирование TrainNotes</title>
+<meta name="google" content="notranslate">
+<meta http-equiv="content-language" content="ru">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap">
+<style>
+/* Одна узкая колонка под телефон: шапка, шаги-лента, отзывы, вопросы */
+:root {
+  --bg: #f3f4fb;
+  --surface: #ffffff;
+  --fg: #1b1d33;
+  --muted: #5d6180;
+  --line: #dfe1f0;
+  --accent: #4b55d6;
+  --accent-soft: #e6e8ff;
+  --on-accent: #ffffff;
+  --warn-bg: #fff4dc;
+  --warn-fg: #6b4a00;
+  --font-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --font-body: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111325; --surface: #1a1d33; --fg: #eceefe; --muted: #a3a7c7; --line: #2c3050;
+    --accent: #8d95ff; --accent-soft: #262a52; --on-accent: #111325;
+    --warn-bg: #3a2f12; --warn-fg: #f5d995;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111325; --surface: #1a1d33; --fg: #eceefe; --muted: #a3a7c7; --line: #2c3050;
+  --accent: #8d95ff; --accent-soft: #262a52; --on-accent: #111325;
+  --warn-bg: #3a2f12; --warn-fg: #f5d995;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 620px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.05rem; margin: 0; font-weight: 600; }
+p { margin: 0; }
+.eyebrow { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.hero { display: flex; flex-direction: column; gap: 14px; }
+.lead { color: var(--muted); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 6px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 2px; }
+.fact b { font-family: var(--font-display); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 0.82rem; color: var(--muted); line-height: 1.3; }
+section { display: flex; flex-direction: column; gap: 16px; }
+.need { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.step { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; position: relative; padding-bottom: 26px; }
+.step:last-child { padding-bottom: 0; }
+.step::before {
+  content: ""; position: absolute; left: 17px; top: 38px; bottom: 4px; width: 2px; background: var(--line);
+}
+.step:last-child::before { display: none; }
+.num {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+  display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
+}
+.body { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding-top: 5px; }
+.body p { color: var(--muted); }
+.path { color: var(--fg); font-weight: 500; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; align-self: flex-start;
+  background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 600;
+  padding: 12px 20px; border-radius: 12px; font-size: 1rem;
+}
+.btn:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.note { background: var(--warn-bg); color: var(--warn-fg); border-radius: 12px; padding: 12px 14px; font-size: 0.95rem; }
+.feedback { background: var(--accent-soft); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.feedback ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.faq { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+details { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; padding: 14px 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--accent); font-size: 1.3rem; line-height: 1; }
+details[open] summary::after { content: "−"; }
+details p { padding-bottom: 16px; color: var(--muted); }
+.thanks { text-align: left; color: var(--muted); font-size: 0.95rem; }
+@media (max-width: 420px) {
+  h1 { font-size: 1.5rem; }
+  .facts { grid-template-columns: 1fr; }
+  .fact { flex-direction: row; align-items: baseline; gap: 10px; }
+}
+body { margin: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+</style>
+</head>
+<body>
+<div class="wrap notranslate" lang="ru" translate="no">
+  <header class="hero">
+    <div class="eyebrow">Просьба о помощи</div>
+    <h1>Помогите выпустить TrainNotes в Google Play</h1>
+    <p class="lead">TrainNotes — дневник тренировок для Android: упражнения, подходы и веса, шаблоны тренировок, таймер отдыха, рекорды и статистика. Чтобы выпустить новое приложение, Google требует, чтобы его две недели проверили минимум 12 человек. Вы очень поможете, если станете одним из них.</p>
+    <div class="facts">
+      <div class="fact"><b>5 минут</b><span>чтобы всё настроить</span></div>
+      <div class="fact"><b>14 дней</b><span>не удалять приложение</span></div>
+      <div class="fact"><b>0 ₽</b><span>всё бесплатно</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Что понадобится</h2>
+    <ul class="need">
+      <li>Телефон на Android. На iPhone приложение не работает.</li>
+      <li>Google-аккаунт, с которым вы заходите в Play Маркет.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Что сделать</h2>
+    <ol class="steps">
+      <li class="step">
+        <div class="num">1</div>
+        <div class="body">
+          <h3>Узнайте свою почту в Play Маркете</h3>
+          <p>Откройте <span class="path">Play Маркет</span> и нажмите на свой кружок-аватар в правом верхнем углу. Под именем написан адрес, например <span class="path">ivan@gmail.com</span>.</p>
+          <p>Отправьте этот адрес мне в сообщении. Важен именно этот адрес: Google пустит в тест только его.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="num">2</div>
+        <div class="body">
+          <h3>Дождитесь моего ответа</h3>
+          <p>Я добавлю вас в список тестировщиков и напишу, что готово. Без этого следующий шаг не сработает.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="num">3</div>
+        <div class="body">
+          <h3>Станьте тестировщиком</h3>
+          <p>Откройте кнопку ниже <span class="path">на телефоне</span> и нажмите <span class="path">«Стать тестировщиком»</span>.</p>
+          <a class="btn" href="https://play.google.com/apps/testing/com.yankin.trainingdiary" target="_blank" rel="noopener">Стать тестировщиком</a>
+          <p class="note">Если пишет, что страница не найдена или недоступна, скорее всего, открыт другой аккаунт. В браузере нажмите на аватар справа сверху и выберите тот же адрес, что прислали мне.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="num">4</div>
+        <div class="body">
+          <h3>Установите приложение</h3>
+          <p>После шага 3 откройте страницу приложения в Play Маркете и нажмите <span class="path">«Установить»</span>, как обычно.</p>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=com.yankin.trainingdiary" target="_blank" rel="noopener">Открыть в Play Маркете</a>
+          <p>Если кнопки «Установить» нет, подождите час-другой и попробуйте снова: Google иногда открывает доступ не сразу.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="num">5</div>
+        <div class="body">
+          <h3>Не удаляйте его 14 дней</h3>
+          <p>Это главное. Google считает только тех, кто остаётся в тесте все две недели. Будет здорово, если вы откроете приложение хотя бы пару раз и попробуете записать тренировку.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="feedback">
+    <h2>Как рассказать, что думаете</h2>
+    <p>Любой отзыв полезен, даже «ничего не понял». Проще всего написать мне в мессенджер. Пригодится всё:</p>
+    <ul>
+      <li>что было непонятно или неудобно;</li>
+      <li>где приложение зависло, закрылось или показало ошибку;</li>
+      <li>чего вам не хватило;</li>
+      <li>что понравилось.</li>
+    </ul>
+    <p>Скриншот экрана очень помогает понять, о чём речь.</p>
+  </section>
+
+  <section>
+    <h2>Частые вопросы</h2>
+    <div class="faq">
+      <details>
+        <summary>Это безопасно?</summary>
+        <p>Да. Приложение устанавливается из официального Play Маркета и проходит проверку Google, как любое другое. Регистрироваться в нём не нужно.</p>
+      </details>
+      <details>
+        <summary>Мне придётся что-то специально проверять?</summary>
+        <p>Нет. Достаточно установить и не удалять. Если захочется — пользуйтесь как обычным дневником тренировок.</p>
+      </details>
+      <details>
+        <summary>На телефоне несколько Google-аккаунтов. Какой выбрать?</summary>
+        <p>Тот, что сейчас выбран в Play Маркете (аватар в правом верхнем углу). Его же присылайте мне, и под ним же открывайте ссылку из шага 3.</p>
+      </details>
+      <details>
+        <summary>Приложение будет мешать или присылать рекламу?</summary>
+        <p>Нет, рекламы в нём нет. Уведомления появляются, только если вы сами включите напоминания о тренировках.</p>
+      </details>
+      <details>
+        <summary>Что будет через 14 дней?</summary>
+        <p>Ничего делать не нужно. Если приложение понравилось, оставьте его: оно продолжит обновляться. Если нет — просто удалите.</p>
+      </details>
+      <details>
+        <summary>Что-то не получилось</summary>
+        <p>Напишите мне, на каком шаге застряли, и пришлите скриншот. Разберёмся вместе.</p>
+      </details>
+    </div>
+  </section>
+
+  <p class="thanks">Спасибо, что помогаете! Без 12 человек приложение не выйдет, так что ваша помощь правда важна.</p>
+</div>
+</body>
+</html>
