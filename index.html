@@ -1,226 +1,182 @@
 <!doctype html>
-<html lang="ru" translate="no">
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Тестирование TrainNotes</title>
-<meta name="google" content="notranslate">
-<meta http-equiv="content-language" content="ru">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrainNotes Privacy Policy</title>
 <style>
-/* Одна узкая колонка под телефон: шапка, шаги-лента, отзывы, вопросы */
-:root {
-  --bg: #f3f4fb;
-  --surface: #ffffff;
-  --fg: #1b1d33;
-  --muted: #5d6180;
-  --line: #dfe1f0;
-  --accent: #4b55d6;
-  --accent-soft: #e6e8ff;
-  --on-accent: #ffffff;
-  --warn-bg: #fff4dc;
-  --warn-fg: #6b4a00;
-  --font-display: "Unbounded", "Golos Text", system-ui, sans-serif;
-  --font-body: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111325; --surface: #1a1d33; --fg: #eceefe; --muted: #a3a7c7; --line: #2c3050;
-    --accent: #8d95ff; --accent-soft: #262a52; --on-accent: #111325;
-    --warn-bg: #3a2f12; --warn-fg: #f5d995;
-    color-scheme: dark;
+  :root {
+    --bg: #ffffff;
+    --text: #1f2933;
+    --muted: #5f6b7a;
+    --accent: #3b6fd8;
+    --rule: #e3e7ee;
   }
-}
-:root[data-theme="dark"] {
-  --bg: #111325; --surface: #1a1d33; --fg: #eceefe; --muted: #a3a7c7; --line: #2c3050;
-  --accent: #8d95ff; --accent-soft: #262a52; --on-accent: #111325;
-  --warn-bg: #3a2f12; --warn-fg: #f5d995;
-  color-scheme: dark;
-}
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.55;
-}
-.wrap {
-  max-width: 620px;
-  margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 28px 56px;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.2rem; }
-h3 { font-size: 1.05rem; margin: 0; font-weight: 600; }
-p { margin: 0; }
-.eyebrow { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
-.hero { display: flex; flex-direction: column; gap: 14px; }
-.lead { color: var(--muted); }
-.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 6px; }
-.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 2px; }
-.fact b { font-family: var(--font-display); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
-.fact span { font-size: 0.82rem; color: var(--muted); line-height: 1.3; }
-section { display: flex; flex-direction: column; gap: 16px; }
-.need { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
-.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.step { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; position: relative; padding-bottom: 26px; }
-.step:last-child { padding-bottom: 0; }
-.step::before {
-  content: ""; position: absolute; left: 17px; top: 38px; bottom: 4px; width: 2px; background: var(--line);
-}
-.step:last-child::before { display: none; }
-.num {
-  width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
-  display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
-}
-.body { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding-top: 5px; }
-.body p { color: var(--muted); }
-.path { color: var(--fg); font-weight: 500; }
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px; align-self: flex-start;
-  background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 600;
-  padding: 12px 20px; border-radius: 12px; font-size: 1rem;
-}
-.btn:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.note { background: var(--warn-bg); color: var(--warn-fg); border-radius: 12px; padding: 12px 14px; font-size: 0.95rem; }
-.feedback { background: var(--accent-soft); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-.feedback ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
-.faq { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
-details { border-bottom: 1px solid var(--line); }
-summary { cursor: pointer; padding: 14px 0; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
-summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; color: var(--accent); font-size: 1.3rem; line-height: 1; }
-details[open] summary::after { content: "−"; }
-details p { padding-bottom: 16px; color: var(--muted); }
-.wrap a:not(.btn) { color: var(--accent); font-weight: 600; }
-.thanks { text-align: left; color: var(--muted); font-size: 0.95rem; }
-@media (max-width: 420px) {
-  h1 { font-size: 1.5rem; }
-  .facts { grid-template-columns: 1fr; }
-  .fact { flex-direction: row; align-items: baseline; gap: 10px; }
-}
-body { margin: 0; }
-*, *::before, *::after { box-sizing: border-box; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b2333;
+      --text: #e6e9ef;
+      --muted: #9ca3af;
+      --accent: #8fb0f5;
+      --rule: #2f3a4f;
+    }
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px 64px;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  nav a, nav span { white-space: nowrap; }
+  nav span { color: var(--muted); }
+  h1 { font-size: 1.9rem; margin: 0 0 4px; }
+  h2 { font-size: 1.3rem; margin: 36px 0 8px; padding-top: 16px; border-top: 1px solid var(--rule); }
+  h3 { font-size: 1.05rem; margin: 20px 0 6px; }
+  p, li { margin: 6px 0; }
+  ul { padding-left: 22px; }
+  a { color: var(--accent); }
+  .updated { color: var(--muted); margin: 0 0 24px; }
+  .summary {
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
 </style>
 </head>
 <body>
-<div class="wrap notranslate" lang="ru" translate="no">
-  <header class="hero">
-    <div class="eyebrow">Просьба о помощи</div>
-    <h1>Помогите выпустить TrainNotes в Google Play</h1>
-    <p class="lead">TrainNotes — дневник тренировок для Android: упражнения, подходы и веса, шаблоны тренировок, таймер отдыха, рекорды и статистика. Чтобы выпустить новое приложение, Google требует, чтобы его две недели проверили минимум 12 человек. Вы очень поможете, если станете одним из них.</p>
-    <div class="facts">
-      <div class="fact"><b>5 минут</b><span>чтобы всё настроить</span></div>
-      <div class="fact"><b>14 дней</b><span>не удалять приложение</span></div>
-    </div>
-  </header>
+<main>
+<nav>
+  <span>English</span>
+  <a href="ru/" hreflang="ru" lang="ru">Русский</a>
+  <a href="de/" hreflang="de" lang="de">Deutsch</a>
+  <a href="es/" hreflang="es" lang="es">Español</a>
+  <a href="fr/" hreflang="fr" lang="fr">Français</a>
+  <a href="it/" hreflang="it" lang="it">Italiano</a>
+  <a href="pl/" hreflang="pl" lang="pl">Polski</a>
+  <a href="pt/" hreflang="pt" lang="pt">Português</a>
+</nav>
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: October 26, 2026</p>
+<p>This Privacy Policy describes how the TrainNotes: Workout Log application (the "Application") handles Your information
+and explains Your privacy rights.</p>
 
-  <section>
-    <h2>Что понадобится</h2>
-    <ul class="need">
-      <li>Телефон на Android. На iPhone приложение не работает.</li>
-      <li>Google-аккаунт, с которым вы заходите в Play Маркет.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Что сделать</h2>
-    <ol class="steps">
-      <li class="step">
-        <div class="num">1</div>
-        <div class="body">
-          <h3>Узнайте свою почту в Play Маркете</h3>
-          <p>Откройте <span class="path">Play Маркет</span> и нажмите на свой кружок-аватар в правом верхнем углу. Под именем написан адрес, например <span class="path">ivan@gmail.com</span>.</p>
-          <p>Отправьте этот адрес мне в Telegram. Важен именно этот адрес: Google пустит в тест только его.</p>
-          <a class="btn" href="https://t.me/Vanger" target="_blank" rel="noopener">Написать в Telegram @Vanger</a>
-        </div>
-      </li>
-      <li class="step">
-        <div class="num">2</div>
-        <div class="body">
-          <h3>Дождитесь моего ответа</h3>
-          <p>Я добавлю вас в список тестировщиков и напишу, что готово. Без этого следующий шаг не сработает.</p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="num">3</div>
-        <div class="body">
-          <h3>Станьте тестировщиком</h3>
-          <p>Откройте кнопку ниже <span class="path">на телефоне</span> и нажмите <span class="path">«Стать тестировщиком»</span>.</p>
-          <a class="btn" href="https://play.google.com/apps/testing/com.yankin.trainingdiary" target="_blank" rel="noopener">Стать тестировщиком</a>
-          <p class="note">Если пишет, что страница не найдена или недоступна, скорее всего, открыт другой аккаунт. В браузере нажмите на аватар справа сверху и выберите тот же адрес, что прислали мне.</p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="num">4</div>
-        <div class="body">
-          <h3>Установите приложение</h3>
-          <p>После шага 3 откройте страницу приложения в Play Маркете и нажмите <span class="path">«Установить»</span>, как обычно.</p>
-          <a class="btn" href="https://play.google.com/store/apps/details?id=com.yankin.trainingdiary" target="_blank" rel="noopener">Открыть в Play Маркете</a>
-          <p>Если кнопки «Установить» нет, подождите час-другой и попробуйте снова: Google иногда открывает доступ не сразу.</p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="num">5</div>
-        <div class="body">
-          <h3>Не удаляйте его 14 дней</h3>
-          <p>Это главное. Google считает только тех, кто остаётся в тесте все две недели. Будет здорово, если вы откроете приложение хотя бы пару раз и попробуете записать тренировку.</p>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="feedback">
-    <h2>Как рассказать, что думаете</h2>
-    <p>Любой отзыв полезен, даже «ничего не понял». Проще всего написать мне в Telegram: <a href="https://t.me/Vanger" target="_blank" rel="noopener">@Vanger</a>. Пригодится всё:</p>
-    <ul>
-      <li>что было непонятно или неудобно;</li>
-      <li>где приложение зависло, закрылось или показало ошибку;</li>
-      <li>чего вам не хватило;</li>
-      <li>что понравилось.</li>
-    </ul>
-    <p>Скриншот экрана очень помогает понять, о чём речь.</p>
-  </section>
-
-  <section>
-    <h2>Частые вопросы</h2>
-    <div class="faq">
-      <details>
-        <summary>Это безопасно?</summary>
-        <p>Да. Приложение устанавливается из официального Play Маркета и проходит проверку Google, как любое другое. Регистрироваться в нём не нужно.</p>
-      </details>
-      <details>
-        <summary>Мне придётся что-то специально проверять?</summary>
-        <p>Нет. Достаточно установить и не удалять. Если захочется — пользуйтесь как обычным дневником тренировок.</p>
-      </details>
-      <details>
-        <summary>На телефоне несколько Google-аккаунтов. Какой выбрать?</summary>
-        <p>Тот, что сейчас выбран в Play Маркете (аватар в правом верхнем углу). Его же присылайте мне, и под ним же открывайте ссылку из шага 3.</p>
-      </details>
-      <details>
-        <summary>Приложение будет мешать или присылать рекламу?</summary>
-        <p>Нет, рекламы в нём нет. Уведомления появляются, только если вы сами включите напоминания о тренировках.</p>
-      </details>
-      <details>
-        <summary>Что будет через 14 дней?</summary>
-        <p>Ничего делать не нужно. Если приложение понравилось, оставьте его: оно продолжит обновляться. Если нет — просто удалите.</p>
-      </details>
-      <details>
-        <summary>Что-то не получилось</summary>
-        <p>Напишите мне в Telegram <a href="https://t.me/Vanger" target="_blank" rel="noopener">@Vanger</a>, на каком шаге застряли, и пришлите скриншот. Разберёмся вместе.</p>
-      </details>
-    </div>
-  </section>
-
-  <p class="thanks">Спасибо, что помогаете! Без 12 человек приложение не выйдет, так что ваша помощь правда важна.</p>
+<div class="summary">
+  <p><strong>In short:</strong> the Application does not collect, transmit or sell any personal data. Everything You enter
+  is stored only on Your Device. The Application has no accounts, no servers, no advertising and no analytics, and it does
+  not request access to the Internet.</p>
 </div>
+
+<h2>Interpretation and Definitions</h2>
+<h3>Interpretation</h3>
+<p>Words with capitalized initial letters have the meanings defined below. The definitions apply in both singular and
+plural.</p>
+<h3>Definitions</h3>
+<ul>
+  <li><strong>Application</strong> refers to TrainNotes: Workout Log, the mobile application for Android.</li>
+  <li><strong>Developer</strong> (referred to as "We", "Us" or "Our") refers to Konstantsin Yankin, the individual developer
+  of the Application, based in Poland.</li>
+  <li><strong>Device</strong> means the phone or tablet on which You install and use the Application.</li>
+  <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
+  <li><strong>You</strong> means the individual using the Application.</li>
+</ul>
+
+<h2>Information We Collect</h2>
+<p>We do not collect any Personal Data. The Application does not have Internet access, does not create user accounts, and
+does not contain advertising, analytics, crash reporting or tracking technologies. It does not use cookies.</p>
+
+<h3>Data You enter in the Application</h3>
+<p>To provide its features, the Application stores the information You enter <strong>locally on Your Device</strong>,
+including:</p>
+<ul>
+  <li>workouts, exercises, sets, weights, repetitions, durations and comments;</li>
+  <li>workout templates, schedules and reminders;</li>
+  <li>body weight entered for workouts;</li>
+  <li>gyms, gym memberships, their prices and freezes;</li>
+  <li>custom muscle groups, equipment and app settings;</li>
+  <li>photos You attach to exercises.</li>
+</ul>
+<p>This information never leaves Your Device unless You choose to export or share it as described below. We have no access
+to it.</p>
+
+<h3>Photos</h3>
+<p>You can attach a photo to an exercise by choosing an image with the system photo picker or by taking a picture with Your
+Device's camera app. The Application only receives the single image You pick or take and stores a copy on Your Device. It
+does not request access to Your whole photo library or to the camera.</p>
+
+<h3>Notifications</h3>
+<p>If You allow notifications, the Application shows local reminders, for example about a scheduled workout or a gym
+membership that is about to expire. Reminders are created on Your Device; no notification data is sent anywhere.</p>
+
+<h2>How Your Data Can Leave Your Device</h2>
+<p>Data leaves Your Device only through actions that You initiate or settings You control:</p>
+<ul>
+  <li><strong>Backups You export.</strong> You can save a backup file or enable automatic backups to a folder You select. The
+  file is written only to the location You choose. If that location is synced with a cloud service, that service's privacy
+  policy applies.</li>
+  <li><strong>Sharing.</strong> You can share a workout template, exercises or a picture of Your workout result through the
+  Android share menu. The content goes only to the app or person You select.</li>
+  <li><strong>Android system backup.</strong> If Android backup is enabled on Your Device, Android may include the
+  Application's data in Your device backup stored in Your Google Account, and transfer it to a new device. This backup is
+  performed by Google, not by Us, under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. You can turn it off in
+  Your Device settings.</li>
+  <li><strong>Importing files.</strong> When You open a backup or a shared file, the Application reads only that file.</li>
+</ul>
+
+<h2>Use of Your Data</h2>
+<p>The data stored on Your Device is used only to provide the Application's features: keeping Your training diary,
+calculating statistics and progress, showing reminders and creating backups. We do not use it for advertising, profiling
+or any other purpose.</p>
+
+<h2>Sharing of Your Data</h2>
+<p>We do not share, sell or transfer Your data to third parties, because We never receive it.</p>
+
+<h2>Retention and Deletion of Your Data</h2>
+<p>Your data stays on Your Device for as long as You keep it there. You can delete it at any time:</p>
+<ul>
+  <li>by deleting individual records in the Application;</li>
+  <li>by clearing the Application's data in Your Device settings;</li>
+  <li>by uninstalling the Application.</li>
+</ul>
+<p>Backup files You exported and backups made by Android are kept where they were saved until You delete them.</p>
+
+<h2>Security of Your Data</h2>
+<p>Your data is stored in the Application's private storage on Your Device, which other apps cannot access. Please keep
+backup files You export in a safe place, because they contain Your training data in readable form.</p>
+
+<h2>Your Rights</h2>
+<p>Because We do not collect or hold any Personal Data about You, We have no data to provide, correct or delete on request.
+You have full control over Your data in the Application and can view, change, export or delete it at any time. If You have
+any questions, contact Us using the details below.</p>
+
+<h2>Children's Privacy</h2>
+<p>The Application is not directed to anyone under the age of 16. We do not knowingly collect Personal Information from
+anyone, including children.</p>
+
+<h2>Links to Other Websites</h2>
+<p>The Application contains a link to the Developer's LinkedIn page and an option to write to Us by email. These open in
+other apps that are not operated by Us. We are not responsible for the content or privacy practices of third-party sites
+or services.</p>
+
+<h2>Changes to this Privacy Policy</h2>
+<p>We may update this Privacy Policy from time to time. Changes are posted on this page and the "Last updated" date at the
+top is updated. If the Application starts collecting or sharing data, this policy will be updated before that change
+takes effect.</p>
+
+<h2>Contact Us</h2>
+<p>If You have any questions about this Privacy Policy, You can contact Us by email:
+<a href="mailto:yankin.konstantin@gmail.com">yankin.konstantin@gmail.com</a></p>
+</main>
 </body>
 </html>
